@@ -1,3 +1,9 @@
+body {
+  background-color: #efe6e6;
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
 .App {
   text-align: center;
 }
