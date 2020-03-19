@@ -1,18 +1,13 @@
 export interface Item {
-  id: number
-  timestampDue: number
+  id: string
+  dueDate?: number
   title: string
-  complete: boolean
+  text: string
+  completed: boolean
 }
 
 export interface NewItemProps {
   add: any
-}
-
-export interface HeaderProps {
-  filter: any
-  addItem: any
-  setFilter: any
 }
 
 export interface ItemSelectProps {
@@ -29,4 +24,12 @@ export interface ItemProps {
 
 export interface ListItemProps {
   items: Item[]
+  newItemLoading: boolean
+  deleteItem: any
+  update: any
+}
+
+export interface FilterProps {
+  handleCompletedChanged: any
+  includeCompleted: boolean
 }

@@ -42,3 +42,11 @@ body {
     transform: rotate(360deg);
   }
 }
+
+#add-btn {
+  margin: 8px;
+}
+
+.removed {
+  display: none;
+}
