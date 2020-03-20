@@ -20,12 +20,17 @@ export const NewItem: FunctionComponent<NewItemProps> = ({ add }) => {
   const classes = useStyles();
   const [title, setTitle] = React.useState("");
   const [text, setText] = React.useState("");
-  const [date, setDate] = React.useState<Date | null>(null);
+  const [dueDate, setDueDate] = React.useState<String | null>(null);
 
-  const handleDateChange = (date: Date | null) => setDate(date);
+  const handleDateChange = (inputDate: any) => {
+    if (inputDate === null || inputDate === "") {
+      setDueDate(null);
+    } else {
+      setDueDate(inputDate.toString());
+    }
+  };
 
   const addItem = () => {
-    const dueDate = date !== null ? date.getTime() : null;
     add({ title, text, dueDate, completed: false, id: "" });
   };
 
@@ -60,7 +65,7 @@ export const NewItem: FunctionComponent<NewItemProps> = ({ add }) => {
               ampm={false}
               label="Due date"
               inputVariant="outlined"
-              value={date}
+              value={dueDate}
               onChange={handleDateChange}
               clearable
             />
