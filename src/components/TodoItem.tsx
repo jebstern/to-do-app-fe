@@ -152,9 +152,6 @@ export const TodoItem: FunctionComponent<TodoItemProps> = ({
             )}
           </CardContent>
           <CardActions className={classes.cardActions}>
-            <Button size="small" color="primary">
-              Done
-            </Button>
             {editableId !== item.id && (
               <Button
                 size="small"
