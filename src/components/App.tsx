@@ -84,7 +84,7 @@ function App() {
       <CssBaseline />
       <Container id="base-container" maxWidth="lg">
         <Typography variant="h1" gutterBottom align="center">
-          Todo list
+          To Do
         </Typography>
         <NewItem add={add} />
         <Filters

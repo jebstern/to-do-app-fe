@@ -1,6 +1,6 @@
 export interface Item {
   id: string
-  dueDate?: number
+  dueDate?: string | null
   title: string
   text: string
   completed: boolean
@@ -18,8 +18,12 @@ export interface ItemSelectProps {
   disabled?: any
 }
 
-export interface ItemProps {
+export interface TodoItemProps {
   item: Item
+  deleteItem: any
+  update: any
+  editableId: string
+  handleEditClicked: any
 }
 
 export interface ListItemProps {

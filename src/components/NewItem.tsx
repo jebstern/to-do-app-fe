@@ -22,9 +22,7 @@ export const NewItem: FunctionComponent<NewItemProps> = ({ add }) => {
   const [text, setText] = React.useState("");
   const [date, setDate] = React.useState<Date | null>(null);
 
-  const handleDateChange = (date: Date | null) => {
-    setDate(date);
-  };
+  const handleDateChange = (date: Date | null) => setDate(date);
 
   const addItem = () => {
     const dueDate = date !== null ? date.getTime() : null;
@@ -64,6 +62,7 @@ export const NewItem: FunctionComponent<NewItemProps> = ({ add }) => {
               inputVariant="outlined"
               value={date}
               onChange={handleDateChange}
+              clearable
             />
           </MuiPickersUtilsProvider>
         </Grid>
