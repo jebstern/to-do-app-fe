@@ -11,7 +11,8 @@ import {
   Card,
   CardContent,
   Button,
-  CardActions
+  CardActions,
+  Grid
 } from "@material-ui/core";
 import { format } from "date-fns";
 
@@ -80,108 +81,120 @@ export const TodoItem: FunctionComponent<TodoItemProps> = ({
   };
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        {editableId !== item.id && (
-          <div>
-            <Typography variant="h5" component="h5">
-              {item.title}
-            </Typography>
-            <Typography component="p">
-              {item.text}
-              <br />
-            </Typography>
-            <Typography component="p" className={classes.dueDate}>
-              Due date:{" "}
-              {item.dueDate !== null && item.dueDate !== undefined
-                ? format(new Date(item.dueDate), "dd.MM.yyyy @ kk:mm:ss")
-                : "None"}
-              <br />
-            </Typography>
-            <Typography color="textSecondary">
-              {item.completed ? "Completed" : "Not completed"}
-            </Typography>
-          </div>
-        )}
-        {editableId === item.id && (
-          <div className={` ${editableId === item.id ? "" : "removed"}`}>
-            <TextField
-              label="Edit title"
-              variant="outlined"
-              defaultValue={title}
-              className={classes.editTextField}
-              onChange={e => setTitle(e.target.value)}
-            />
-            <TextField
-              label="Edit text"
-              variant="outlined"
-              defaultValue={text}
-              multiline
-              rows="5"
-              className={classes.editTextField}
-              onChange={e => setText(e.target.value)}
-            />
-
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DateTimePicker
-                className={classes.editTextField}
-                disablePast={true}
-                ampm={false}
-                label="Due date"
-                inputVariant="outlined"
-                value={dueDate}
-                onChange={handleDateChanged}
-                clearable
-              />
-            </MuiPickersUtilsProvider>
-
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={completed}
-                  onChange={event => setCompleted(event.target.checked)}
-                  name="completed"
+    <Grid container direction="row" justify="center" alignItems="flex-start">
+      <Grid item xs={12} sm={10} md={8} lg={8} xl={8}>
+        <Card className={classes.root}>
+          <CardContent>
+            {editableId !== item.id && (
+              <div>
+                <Typography variant="h5" component="h5">
+                  {item.title}
+                </Typography>
+                <Typography component="p">
+                  {item.text}
+                  <br />
+                </Typography>
+                <Typography component="p" className={classes.dueDate}>
+                  Due date:{" "}
+                  {item.dueDate !== null && item.dueDate !== undefined
+                    ? format(new Date(item.dueDate), "dd.MM.yyyy @ kk:mm:ss")
+                    : "None"}
+                  <br />
+                </Typography>
+                <Typography color="textSecondary">
+                  {item.completed ? "Completed" : "Not completed"}
+                </Typography>
+              </div>
+            )}
+            {editableId === item.id && (
+              <div className={` ${editableId === item.id ? "" : "removed"}`}>
+                <TextField
+                  label="Edit title"
+                  variant="outlined"
+                  defaultValue={title}
+                  className={classes.editTextField}
+                  onChange={e => setTitle(e.target.value)}
                 />
-              }
-              label="Completed"
-            />
-          </div>
-        )}
-      </CardContent>
-      <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary">
-          Done
-        </Button>
-        {editableId !== item.id && (
-          <Button size="small" color="primary" onClick={() => handleEdit(item)}>
-            Edit
-          </Button>
-        )}
+                <TextField
+                  label="Edit text"
+                  variant="outlined"
+                  defaultValue={text}
+                  multiline
+                  rows="5"
+                  className={classes.editTextField}
+                  onChange={e => setText(e.target.value)}
+                />
 
-        {editableId === item.id && (
-          <div>
-            <Button variant="contained" color="primary" onClick={updateItem}>
-              Save
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <DateTimePicker
+                    className={classes.editTextField}
+                    disablePast={true}
+                    ampm={false}
+                    label="Due date"
+                    inputVariant="outlined"
+                    value={dueDate}
+                    onChange={handleDateChanged}
+                    clearable
+                  />
+                </MuiPickersUtilsProvider>
+
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={completed}
+                      onChange={event => setCompleted(event.target.checked)}
+                      name="completed"
+                    />
+                  }
+                  label="Completed"
+                />
+              </div>
+            )}
+          </CardContent>
+          <CardActions className={classes.cardActions}>
+            <Button size="small" color="primary">
+              Done
             </Button>
+            {editableId !== item.id && (
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => handleEdit(item)}
+              >
+                Edit
+              </Button>
+            )}
+
+            {editableId === item.id && (
+              <div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={updateItem}
+                >
+                  Save
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleEditClicked("")}
+                >
+                  Cancel
+                </Button>
+              </div>
+            )}
+
             <Button
-              variant="contained"
+              size="small"
               color="secondary"
-              onClick={() => handleEditClicked("")}
+              onClick={e => deleteSelectedItem(item.id)}
             >
-              Cancel
+              Delete
             </Button>
-          </div>
-        )}
-
-        <Button
-          size="small"
-          color="secondary"
-          onClick={e => deleteSelectedItem(item.id)}
-        >
-          Delete
-        </Button>
-      </CardActions>
-    </Card>
+          </CardActions>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 
